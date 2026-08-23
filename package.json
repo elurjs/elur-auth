@@ -58,7 +58,7 @@
   },
   "peerDependencies": {
     "@deijose/nix-js": "^2.5.3 || ^3.0.0",
-    "@deijose/nix-query": "^1.3.7"
+    "@deijose/nix-query": "^1.5.1"
   },
   "peerDependenciesMeta": {
     "@deijose/nix-query": {
@@ -66,8 +66,8 @@
     }
   },
   "devDependencies": {
-    "@deijose/nix-js": "3.0.3",
-    "@deijose/nix-query": "^1.3.7",
+    "@deijose/nix-js": "3.2.1",
+    "@deijose/nix-query": "^1.5.1",
     "happy-dom": "^20.8.3",
     "terser": "^5.46.0",
     "typescript": "~5.9.3",
