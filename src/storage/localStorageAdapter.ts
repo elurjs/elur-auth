@@ -38,7 +38,6 @@ export function localStorageAdapter<Session>(
       try {
         globalThis.localStorage.removeItem(key);
       } catch {
-        // Ignore
       }
     },
   };

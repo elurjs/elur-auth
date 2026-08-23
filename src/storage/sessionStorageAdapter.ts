@@ -38,7 +38,6 @@ export function sessionStorageAdapter<Session>(
       try {
         globalThis.sessionStorage.removeItem(key);
       } catch {
-        // Ignore
       }
     },
   };
