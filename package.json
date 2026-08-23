@@ -1,6 +1,6 @@
 {
   "name": "@deijose/nix-js-auth",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Authentication and authorization library for Nix.js — drivers, policies, and router guards built on signals.",
   "license": "MIT",
   "author": "Deiver Vasquez",
