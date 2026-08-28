@@ -19,7 +19,7 @@ export function createAuthManager(): AuthManager {
   return {
     create(name, options) {
       if (instances.has(name)) {
-        throw new Error(`[nix-auth] Auth instance '${name}' already exists.`);
+        throw new Error(`[elur-auth] Auth instance '${name}' already exists.`);
       }
       const auth = createAuth({ ...options, name });
       instances.set(name, auth);

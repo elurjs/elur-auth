@@ -39,7 +39,7 @@ export function sessionCookieDriver<User = unknown>(
         credentials: "include",
       });
       if (!res.ok) {
-        throw new Error(`[nix-auth] Session cookie login failed: ${res.status}`);
+        throw new Error(`[elur-auth] Session cookie login failed: ${res.status}`);
       }
       return (await res.json()) as SessionCookieSession<User>;
     },

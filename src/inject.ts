@@ -1,8 +1,8 @@
-import { createInjectionKey, inject, signal, computed } from "@deijose/nix-js";
-import type { Signal } from "@deijose/nix-js";
+import { createInjectionKey, inject, signal, computed } from "@elurjs/core";
+import type { Signal } from "@elurjs/core";
 import type { AuthInstance } from "./core/types";
 
-export const AuthKey = createInjectionKey<AuthInstance<unknown, unknown>>("nix:auth");
+export const AuthKey = createInjectionKey<AuthInstance<unknown, unknown>>("elur:auth");
 
 // Global reactive holder for the active auth instance (Fix #6).
 // Allows useAuth() to be reactive when the auth instance changes at runtime

@@ -3,7 +3,7 @@ import { cookieAdapter } from "../storage/cookieAdapter";
 
 describe("cookieAdapter", () => {
   it("persists and retrieves session from document.cookie", () => {
-    const storage = cookieAdapter({ key: "nix-auth-test", days: 1 });
+    const storage = cookieAdapter({ key: "elur-auth-test", days: 1 });
     const session = { user: { id: "1" } };
 
     storage.set(session);

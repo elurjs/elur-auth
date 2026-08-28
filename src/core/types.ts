@@ -1,4 +1,4 @@
-import type { Signal } from "@deijose/nix-js";
+import type { Signal } from "@elurjs/core";
 
 export type AuthEvent =
   | "login"
@@ -64,7 +64,7 @@ export interface RefreshOptions {
 
 export interface MultiTabSyncOptions {
   /**
-   * Channel name for BroadcastChannel. Defaults to `nix-auth:<name>`.
+   * Channel name for BroadcastChannel. Defaults to `elur-auth:<name>`.
    */
   channelName?: string;
   /**

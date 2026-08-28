@@ -1,9 +1,9 @@
-# @deijose/nix-js-auth
+# @elurjs/auth
 
-[![npm version](https://img.shields.io/npm/v/@deijose/nix-js-auth.svg)](https://www.npmjs.com/package/@deijose/nix-js-auth)
+[![npm version](https://img.shields.io/npm/v/@elurjs/auth.svg)](https://www.npmjs.com/package/@elurjs/auth)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Authentication and authorization library for [Nix.js](https://nix-js.dev) built entirely on reactive signals.
+Authentication and authorization library for [Elur](https://elur.dev) built entirely on reactive signals.
 
 **Agnostic by design.** Bring your own driver, your own user model, and your own authorization rules. The library only orchestrates state and exposes it as signals that the router, templates, and components can read reactively.
 
@@ -24,7 +24,7 @@ Authentication and authorization library for [Nix.js](https://nix-js.dev) built 
 - [Optional provide/inject](#optional-provideinject)
 - [Multi-provider](#multi-provider)
 - [Auto-refresh](#auto-refresh)
-- [Optional `nix-query` integration](#optional-nix-query-integration)
+- [Optional `elur-query` integration](#optional-elur-query-integration)
 - [Testing](#testing)
 - [Best practices](#best-practices)
 - [TypeScript](#typescript)
@@ -45,16 +45,16 @@ Authentication and authorization library for [Nix.js](https://nix-js.dev) built 
 - **Storage adapters**: localStorage, sessionStorage, cookies, and memory.
 - **Auth manager**: `createAuthManager` for multi-context or multi-tenant apps.
 - **SSR seeds**: `seed` option for server-side rendering.
-- **Optional `nix-query` integration**: auth-aware commands via `@deijose/nix-js-auth/command`.
+- **Optional `elur-query` integration**: auth-aware commands via `@elurjs/auth/command`.
 - **TypeScript-first**: full generic support for `Session`, `User`, and `Credentials`.
 
 ## Installation
 
 ```bash
-npm install @deijose/nix-js @deijose/nix-js-auth
+npm install @elurjs/core @elurjs/auth
 ```
 
-`@deijose/nix-js` is a peer dependency.
+`@elurjs/core` is a peer dependency.
 
 ## Core concepts
 
@@ -81,7 +81,7 @@ A policy is a pure function that decides whether a user can perform an action. P
 ## Quick start
 
 ```ts
-import { createAuth, jwtDriver, localStorageAdapter, createPolicy } from "@deijose/nix-js-auth";
+import { createAuth, jwtDriver, localStorageAdapter, createPolicy } from "@elurjs/auth";
 
 const auth = createAuth({
   driver: jwtDriver({
@@ -146,7 +146,7 @@ interface RefreshOptions {
 
 interface MultiTabSyncOptions {
   enabled?: boolean; // default: false
-  channelName?: string; // default: "nix-auth:<name>"
+  channelName?: string; // default: "elur-auth:<name>"
 }
 ```
 
@@ -231,7 +231,7 @@ interface AuthDriver<Session, User, Credentials> {
 ### `jwtDriver(options)`
 
 ```ts
-import { jwtDriver } from "@deijose/nix-js-auth";
+import { jwtDriver } from "@elurjs/auth";
 
 const auth = createAuth({
   driver: jwtDriver({
@@ -259,7 +259,7 @@ interface JwtSession<User> {
 For backends that use `httpOnly` session cookies. The browser sends the cookie automatically with `credentials: "include"`.
 
 ```ts
-import { sessionCookieDriver } from "@deijose/nix-js-auth";
+import { sessionCookieDriver } from "@elurjs/auth";
 
 const auth = createAuth({
   driver: sessionCookieDriver({
@@ -278,7 +278,7 @@ The driver will call `sessionUrl` during hydration to recover the current user f
 Useful for tests and prototypes.
 
 ```ts
-import { mockDriver } from "@deijose/nix-js-auth";
+import { mockDriver } from "@elurjs/auth";
 
 const auth = createAuth({
   driver: mockDriver({
@@ -380,7 +380,7 @@ When the user logs out on any tab, all tabs clear the session.
 A provider is a named driver. This is useful when an app supports multiple authentication mechanisms.
 
 ```ts
-import { credentialsProvider, mockDriver } from "@deijose/nix-js-auth";
+import { credentialsProvider, mockDriver } from "@elurjs/auth";
 
 const auth = createAuth({
   providers: {
@@ -412,7 +412,7 @@ console.log(auth.activeProvider.value); // "apiKey"
 Provider for API-key authentication.
 
 ```ts
-import { apiKeyProvider } from "@deijose/nix-js-auth";
+import { apiKeyProvider } from "@elurjs/auth";
 
 const auth = createAuth({
   providers: {
@@ -436,7 +436,7 @@ await auth.login("apiKey", { key: "secret" });
 Basic OIDC provider with PKCE. The provider discovers endpoints from the issuer's `/.well-known/openid-configuration`.
 
 ```ts
-import { oidcProvider } from "@deijose/nix-js-auth";
+import { oidcProvider } from "@elurjs/auth";
 
 const provider = oidcProvider({
   authority: "https://idp.example.com",
@@ -477,7 +477,7 @@ executes the redirect (or background fetch) automatically. Supports a custom
 Storage adapters are responsible for persisting the session between reloads.
 
 ```ts
-import { localStorageAdapter, sessionStorageAdapter, cookieAdapter, memoryAdapter } from "@deijose/nix-js-auth";
+import { localStorageAdapter, sessionStorageAdapter, cookieAdapter, memoryAdapter } from "@elurjs/auth";
 
 const auth = createAuth({
   driver,
@@ -525,7 +525,7 @@ In-memory only. Useful for tests and server-side rendering seeds.
 For apps that need multiple auth instances (multi-context, multi-tenant, or admin + customer portals):
 
 ```ts
-import { createAuthManager, jwtDriver, localStorageAdapter } from "@deijose/nix-js-auth";
+import { createAuthManager, jwtDriver, localStorageAdapter } from "@elurjs/auth";
 
 const manager = createAuthManager();
 
@@ -570,7 +570,7 @@ const auth = createAuth({
 Policies are pure functions that receive the user, the action, the context, and the session.
 
 ```ts
-import { createPolicy } from "@deijose/nix-js-auth";
+import { createPolicy } from "@elurjs/auth";
 
 auth.attachPolicy(
   createPolicy((user, action, context, session) => {
@@ -594,7 +594,7 @@ auth.attachPolicy(
 ### Policy helpers
 
 ```ts
-import { hasRole, hasPermission, hasScope, isOwner, all, any, not } from "@deijose/nix-js-auth";
+import { hasRole, hasPermission, hasScope, isOwner, all, any, not } from "@elurjs/auth";
 
 auth.attachPolicy(
   createPolicy((user, action, context) => {
@@ -628,7 +628,7 @@ auth.attachPolicy(
 Convenience policy for role-based and permission-based access control.
 
 ```ts
-import { rbacPolicy } from "@deijose/nix-js-auth";
+import { rbacPolicy } from "@elurjs/auth";
 
 auth.attachPolicy(
   rbacPolicy({
@@ -660,8 +660,8 @@ auth.can("permission:post:edit", { tenant: "globex" }).value;
 ## Router integration
 
 ```ts
-import { createRouter } from "@deijose/nix-js";
-import { authRouterPlugin, requireAuth } from "@deijose/nix-js-auth";
+import { createRouter } from "@elurjs/core";
+import { authRouterPlugin, requireAuth } from "@elurjs/auth";
 
 const router = createRouter([
   { path: "/login", component: LoginPage, meta: { auth: "public" } },
@@ -720,7 +720,7 @@ const router = createRouter([
 ### Standalone guards
 
 ```ts
-import { requireAuth, requireRole, requirePermission, requireProvider, requirePolicy } from "@deijose/nix-js-auth";
+import { requireAuth, requireRole, requirePermission, requireProvider, requirePolicy } from "@elurjs/auth";
 
 router.beforeEach(requireAuth(auth, "/login"));
 router.beforeEach(requireRole(auth, "admin", "/unauthorized"));
@@ -751,8 +751,8 @@ router.beforeEach(
 ## Optional provide/inject
 
 ```ts
-import { provide } from "@deijose/nix-js";
-import { AuthKey, useAuth, setActiveAuth } from "@deijose/nix-js-auth";
+import { provide } from "@elurjs/core";
+import { AuthKey, useAuth, setActiveAuth } from "@elurjs/auth";
 
 provide(AuthKey, auth);
 
@@ -767,7 +767,7 @@ if (authSignal.value) {
 }
 
 // Non-reactive access (for guards, plugins):
-import { getAuth } from "@deijose/nix-js-auth";
+import { getAuth } from "@elurjs/auth";
 const auth = getAuth();
 ```
 
@@ -782,7 +782,7 @@ the instance directly.
 ## Multi-provider
 
 ```ts
-import { createAuth, credentialsProvider, mockDriver } from "@deijose/nix-js-auth";
+import { createAuth, credentialsProvider, mockDriver } from "@elurjs/auth";
 
 const auth = createAuth({
   providers: {
@@ -844,16 +844,16 @@ const auth = createAuth({
 });
 ```
 
-## Optional `nix-query` integration
+## Optional `elur-query` integration
 
-`@deijose/nix-query` is an **optional** peer dependency. If you already use it, you can wrap auth-aware commands from the `./command` subpath.
+`@elurjs/query` is an **optional** peer dependency. If you already use it, you can wrap auth-aware commands from the `./command` subpath.
 
 ```bash
-npm install @deijose/nix-query
+npm install @elurjs/query
 ```
 
 ```ts
-import { authCommand, createLoginCommand, createLogoutCommand, authHeaders } from "@deijose/nix-js-auth/command";
+import { authCommand, createLoginCommand, createLogoutCommand, authHeaders } from "@elurjs/auth/command";
 
 // Inject the current token into any command
 const savePost = authCommand(auth, "post/save", async (payload, ctx) => {
@@ -880,7 +880,7 @@ const logout = createLogoutCommand(auth, "auth/logout");
 
 ```ts
 import { describe, it, expect } from "vitest";
-import { createAuth, mockDriver } from "@deijose/nix-js-auth";
+import { createAuth, mockDriver } from "@elurjs/auth";
 
 describe("auth", () => {
   it("logs in", async () => {
@@ -988,7 +988,7 @@ The returned `AuthInstance` is typed accordingly.
 
 ### Optional command integration
 
-From `@deijose/nix-js-auth/command`:
+From `@elurjs/auth/command`:
 
 - `authCommand(auth, commandKey, executeFn, options?)`
 - `createLoginCommand(auth, commandKey, options?)`
@@ -1013,9 +1013,9 @@ If the driver implements `refresh` and `getExpiry`, and `autoRefresh` is enabled
 
 Use the built-in `oidcProvider` for a basic PKCE flow, or write a custom driver that handles the redirect and callback.
 
-### How do I integrate with `nix-query`?
+### How do I integrate with `elur-query`?
 
-Import `@deijose/nix-js-auth/command` and use `authCommand`, `createLoginCommand`, or `createLogoutCommand`.
+Import `@elurjs/auth/command` and use `authCommand`, `createLoginCommand`, or `createLogoutCommand`.
 
 ## License
 

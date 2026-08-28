@@ -41,7 +41,7 @@ export function jwtDriver<User = unknown>(
         body: JSON.stringify(credentials),
       });
       if (!res.ok) {
-        throw new Error(`[nix-auth] JWT login failed: ${res.status}`);
+        throw new Error(`[elur-auth] JWT login failed: ${res.status}`);
       }
       return (await res.json()) as JwtSession<User>;
     },
@@ -60,7 +60,7 @@ export function jwtDriver<User = unknown>(
 
     async refresh(session) {
       if (!refreshUrl) {
-        throw new Error("[nix-auth] JWT refreshUrl not configured.");
+        throw new Error("[elur-auth] JWT refreshUrl not configured.");
       }
       const res = await fetcher(refreshUrl, {
         method: "POST",
@@ -72,7 +72,7 @@ export function jwtDriver<User = unknown>(
         body: JSON.stringify({ refreshToken: session.refreshToken }),
       });
       if (!res.ok) {
-        throw new Error(`[nix-auth] JWT refresh failed: ${res.status}`);
+        throw new Error(`[elur-auth] JWT refresh failed: ${res.status}`);
       }
       return (await res.json()) as JwtSession<User>;
     },

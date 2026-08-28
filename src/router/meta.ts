@@ -1,4 +1,4 @@
-import type { NavigationGuardResult } from "@deijose/nix-js/router";
+import type { NavigationGuardResult } from "@elurjs/core/router";
 import type { AuthInstance } from "../core/types";
 
 export type RouteAuthMeta =

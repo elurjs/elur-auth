@@ -1,5 +1,5 @@
-import { signal, computed, batch } from "@deijose/nix-js";
-import type { Signal } from "@deijose/nix-js";
+import { signal, computed, batch } from "@elurjs/core";
+import type { Signal } from "@elurjs/core";
 import type {
   AuthDriver,
   AuthPolicy,
@@ -76,7 +76,7 @@ export function createAuth<
   } = options;
 
   if (!driver && !providers) {
-    throw new Error("[nix-auth] createAuth requires either a 'driver' or 'providers' option.");
+    throw new Error("[elur-auth] createAuth requires either a 'driver' or 'providers' option.");
   }
 
   const providerMap = providers ?? {};
@@ -194,7 +194,7 @@ export function createAuth<
     if (!multiTabSync.enabled) return;
     if (typeof globalThis === "undefined" || typeof BroadcastChannel === "undefined") return;
 
-    const channelName = multiTabSync.channelName ?? `nix-auth:${name}`;
+    const channelName = multiTabSync.channelName ?? `elur-auth:${name}`;
     _broadcastChannel = new BroadcastChannel(channelName);
 
     _broadcastChannel.addEventListener("message", (event) => {
@@ -241,7 +241,7 @@ export function createAuth<
     const d = provider ? providerMap[provider] : activeDriver.value;
     if (!d) {
       throw new Error(
-        `[nix-auth] No driver available${provider ? ` for provider '${provider}'` : ""}.`,
+        `[elur-auth] No driver available${provider ? ` for provider '${provider}'` : ""}.`,
       );
     }
     if (provider) {

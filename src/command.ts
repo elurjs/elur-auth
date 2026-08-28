@@ -1,9 +1,9 @@
-import { createCommand } from "@deijose/nix-query";
+import { createCommand } from "@elurjs/query";
 import type {
   CommandOptions,
   CommandResult,
   CommandContext,
-} from "@deijose/nix-query";
+} from "@elurjs/query";
 import type { AuthInstance } from "./core/types";
 
 export type AuthCommandContext = CommandContext & {

@@ -57,7 +57,7 @@ function hasCrypto(): boolean {
 
 function randomBytes(length: number): Uint8Array {
   if (!hasCrypto()) {
-    throw new Error("[nix-auth] OIDC provider requires Web Crypto API.");
+    throw new Error("[elur-auth] OIDC provider requires Web Crypto API.");
   }
   return globalThis.crypto.getRandomValues(new Uint8Array(length));
 }
@@ -78,7 +78,7 @@ function generateRandomString(length: number): string {
 
 async function generateCodeChallenge(verifier: string): Promise<string> {
   if (!hasCrypto()) {
-    throw new Error("[nix-auth] OIDC provider requires Web Crypto API.");
+    throw new Error("[elur-auth] OIDC provider requires Web Crypto API.");
   }
   const data = new TextEncoder().encode(verifier);
   const hash = await globalThis.crypto.subtle.digest("SHA-256", data);
@@ -88,7 +88,7 @@ async function generateCodeChallenge(verifier: string): Promise<string> {
 function parseJwt(token: string): Record<string, unknown> {
   const parts = token.split(".");
   if (parts.length !== 3) {
-    throw new Error("[nix-auth] Invalid JWT token.");
+    throw new Error("[elur-auth] Invalid JWT token.");
   }
   const payload = atob(parts[1].replace(/-/g, "+").replace(/_/g, "/"));
   return JSON.parse(payload) as Record<string, unknown>;
@@ -114,7 +114,7 @@ export function oidcProvider<User = unknown>(
     metadataPromise = (async () => {
       const res = await fetcher(`${authority.replace(/\/$/, "")}/.well-known/openid-configuration`);
       if (!res.ok) {
-        throw new Error(`[nix-auth] OIDC metadata discovery failed: ${res.status}`);
+        throw new Error(`[elur-auth] OIDC metadata discovery failed: ${res.status}`);
       }
       return (await res.json()) as Record<string, unknown>;
     })();
@@ -130,7 +130,7 @@ export function oidcProvider<User = unknown>(
     const meta = await resolveMetadata();
     const authorizationEndpoint = meta["authorization_endpoint"];
     if (typeof authorizationEndpoint !== "string") {
-      throw new Error("[nix-auth] OIDC authorization_endpoint not found in metadata.");
+      throw new Error("[elur-auth] OIDC authorization_endpoint not found in metadata.");
     }
     const state = generateRandomString(32);
     const nonce = generateRandomString(32);
@@ -160,7 +160,7 @@ export function oidcProvider<User = unknown>(
     const meta = await resolveMetadata();
     const endSessionEndpoint = meta["end_session_endpoint"];
     if (typeof endSessionEndpoint !== "string") {
-      throw new Error("[nix-auth] OIDC end_session_endpoint not found in metadata.");
+      throw new Error("[elur-auth] OIDC end_session_endpoint not found in metadata.");
     }
     const params = new URLSearchParams();
     if (idToken) params.set("id_token_hint", idToken);
@@ -172,7 +172,7 @@ export function oidcProvider<User = unknown>(
     const meta = await resolveMetadata();
     const tokenEndpoint = meta["token_endpoint"];
     if (typeof tokenEndpoint !== "string") {
-      throw new Error("[nix-auth] OIDC token_endpoint not found in metadata.");
+      throw new Error("[elur-auth] OIDC token_endpoint not found in metadata.");
     }
 
     const body = new URLSearchParams({
@@ -190,7 +190,7 @@ export function oidcProvider<User = unknown>(
     });
 
     if (!res.ok) {
-      throw new Error(`[nix-auth] OIDC token exchange failed: ${res.status}`);
+      throw new Error(`[elur-auth] OIDC token exchange failed: ${res.status}`);
     }
 
     const tokenResponse = (await res.json()) as Record<string, unknown>;
@@ -253,7 +253,7 @@ export function oidcProvider<User = unknown>(
       globalThis.location.href = url;
     } else {
       throw new Error(
-        "[nix-auth] OIDC performLogout: no redirect function provided and window.location is unavailable.",
+        "[elur-auth] OIDC performLogout: no redirect function provided and window.location is unavailable.",
       );
     }
   }

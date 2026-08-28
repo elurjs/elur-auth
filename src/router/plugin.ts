@@ -1,4 +1,4 @@
-import type { Router, NavigationGuard, NavigationGuardResult } from "@deijose/nix-js/router";
+import type { Router, NavigationGuard, NavigationGuardResult } from "@elurjs/core/router";
 import type { AuthInstance } from "../core/types";
 import type { RouteAuthMeta, RouteAuthMetaObject, MetaInterpreter } from "./meta";
 import { isPublic } from "./meta";

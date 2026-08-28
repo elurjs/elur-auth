@@ -1,4 +1,4 @@
-import type { NavigationGuard } from "@deijose/nix-js/router";
+import type { NavigationGuard } from "@elurjs/core/router";
 import type { AuthInstance } from "../core/types";
 
 export function requireAuth<Session, User>(

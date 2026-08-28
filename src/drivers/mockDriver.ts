@@ -17,7 +17,7 @@ export function mockDriver<Session = unknown, User = unknown, Credentials = unkn
 ): AuthDriver<Session, User, Credentials> {
   return {
     name: options.name ?? "mock",
-    login: options.login ?? (() => Promise.reject(new Error("[nix-auth] mock login not implemented"))),
+    login: options.login ?? (() => Promise.reject(new Error("[elur-auth] mock login not implemented"))),
     logout: options.logout ?? (() => Promise.resolve()),
     refresh: options.refresh,
     toUser: options.toUser,

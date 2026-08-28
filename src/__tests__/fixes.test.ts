@@ -5,7 +5,7 @@ import { mockDriver } from "../drivers/mockDriver";
 import { memoryAdapter } from "../storage/memoryAdapter";
 import { cookieAdapter } from "../storage/cookieAdapter";
 import { useAuth, setActiveAuth, getAuth } from "../inject";
-import { createRouter } from "@deijose/nix-js";
+import { createRouter } from "@elurjs/core";
 import { authRouterPlugin } from "../router/plugin";
 import { oidcProvider } from "../providers/oidcProvider";
 import type { OidcSession } from "../providers/oidcProvider";
@@ -537,7 +537,7 @@ describe("Fix #7: Multi-tab sync via BroadcastChannel", () => {
   // No fake timers in this block — use real timers for BroadcastChannel.
 
   it("broadcasts login to other tabs", async () => {
-    const channelName = "nix-auth:test-login-" + Date.now();
+    const channelName = "elur-auth:test-login-" + Date.now();
     const receivedMessages: Array<{ type: string; session: unknown }> = [];
 
     const otherTabChannel = new BroadcastChannel(channelName);
@@ -567,7 +567,7 @@ describe("Fix #7: Multi-tab sync via BroadcastChannel", () => {
   });
 
   it("broadcasts logout to other tabs", async () => {
-    const channelName = "nix-auth:test-logout-" + Date.now();
+    const channelName = "elur-auth:test-logout-" + Date.now();
     const receivedMessages: Array<{ type: string; session: unknown }> = [];
 
     const otherTabChannel = new BroadcastChannel(channelName);
@@ -597,7 +597,7 @@ describe("Fix #7: Multi-tab sync via BroadcastChannel", () => {
   });
 
   it("receives login from other tabs and syncs session", async () => {
-    const channelName = "nix-auth:test-receive-" + Date.now();
+    const channelName = "elur-auth:test-receive-" + Date.now();
 
     const auth = createAuth({
       driver: mockDriver({
@@ -628,7 +628,7 @@ describe("Fix #7: Multi-tab sync via BroadcastChannel", () => {
   });
 
   it("receives logout from other tabs and clears session", async () => {
-    const channelName = "nix-auth:test-receive-logout-" + Date.now();
+    const channelName = "elur-auth:test-receive-logout-" + Date.now();
 
     const auth = createAuth({
       driver: mockDriver({
@@ -655,7 +655,7 @@ describe("Fix #7: Multi-tab sync via BroadcastChannel", () => {
   });
 
   it("does not broadcast when multiTabSync is disabled (default)", async () => {
-    const channelName = "nix-auth:test-no-sync-" + Date.now();
+    const channelName = "elur-auth:test-no-sync-" + Date.now();
     const receivedMessages: unknown[] = [];
 
     const otherTabChannel = new BroadcastChannel(channelName);
@@ -680,7 +680,7 @@ describe("Fix #7: Multi-tab sync via BroadcastChannel", () => {
   });
 
   it("does not re-broadcast messages it received (prevents loops)", async () => {
-    const channelName = "nix-auth:test-no-loop-" + Date.now();
+    const channelName = "elur-auth:test-no-loop-" + Date.now();
     let messagesReceived = 0;
 
     const auth = createAuth({

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { createRouter } from "@deijose/nix-js";
+import { createRouter } from "@elurjs/core";
 import { createAuth } from "../core/createAuth";
 import { mockDriver } from "../drivers/mockDriver";
 import { authRouterPlugin } from "../router/plugin";

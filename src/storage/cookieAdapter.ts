@@ -51,7 +51,7 @@ export function cookieAdapter<Session>(options: CookieAdapterOptions): AuthStora
 
   if (!suppressSecurityWarning && hasDocument && typeof console !== "undefined" && console.warn) {
     console.warn(
-      "[nix-auth] cookieAdapter stores data in document.cookie (JS-accessible)." +
+      "[elur-auth] cookieAdapter stores data in document.cookie (JS-accessible)." +
       " Do NOT store JWTs or tokens here — use sessionCookieDriver (httpOnly)" +
       " or localStorageAdapter instead. Set suppressSecurityWarning: true to silence this.",
     );

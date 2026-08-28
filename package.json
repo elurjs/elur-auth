@@ -1,22 +1,22 @@
 {
-  "name": "@deijose/nix-js-auth",
+  "name": "@elurjs/auth",
   "version": "1.2.2",
-  "description": "Authentication and authorization library for Nix.js — drivers, policies, and router guards built on signals.",
+  "description": "Authentication and authorization library for Elur — drivers, policies, and router guards built on signals.",
   "license": "MIT",
   "author": "Deiver Vasquez",
   "type": "module",
-  "homepage": "https://github.com/DeijoseDevelop/nix-js-auth",
+  "homepage": "https://github.com/elurjs/elur-auth",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DeijoseDevelop/nix-js-auth.git"
+    "url": "git+https://github.com/elurjs/elur-auth.git"
   },
-  "main": "./dist/lib/nix-js-auth.cjs",
-  "module": "./dist/lib/nix-js-auth.js",
+  "main": "./dist/lib/elur-auth.cjs",
+  "module": "./dist/lib/elur-auth.js",
   "types": "./dist/lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/lib/nix-js-auth.js",
-      "require": "./dist/lib/nix-js-auth.cjs",
+      "import": "./dist/lib/elur-auth.js",
+      "require": "./dist/lib/elur-auth.cjs",
       "types": "./dist/lib/index.d.ts"
     },
     "./command": {
@@ -26,7 +26,7 @@
     }
   },
   "keywords": [
-    "nix-js",
+    "elur",
     "auth",
     "authentication",
     "authorization",
@@ -51,27 +51,27 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "clean:lib": "rm -rf dist/lib",
-    "build:lib": "vite build --config vite.lib.config.ts && tsc --project tsconfig.lib.json && terser dist/lib/nix-js-auth.js -c -m -o dist/lib/nix-js-auth.js && terser dist/lib/nix-js-auth.cjs -c -m -o dist/lib/nix-js-auth.cjs && terser dist/lib/command.js -c -m -o dist/lib/command.js && terser dist/lib/command.cjs -c -m -o dist/lib/command.cjs",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc --project tsconfig.lib.json && terser dist/lib/elur-auth.js -c -m -o dist/lib/elur-auth.js && terser dist/lib/elur-auth.cjs -c -m -o dist/lib/elur-auth.cjs && terser dist/lib/command.js -c -m -o dist/lib/command.js && terser dist/lib/command.cjs -c -m -o dist/lib/command.cjs",
     "prepack": "npm run clean:lib && npm run build:lib",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
   "peerDependencies": {
-    "@deijose/nix-js": "^2.5.3 || ^3.0.0",
-    "@deijose/nix-query": "^1.5.1"
+    "@elurjs/core": "^2.5.3 || ^3.0.0",
+    "@elurjs/query": "^1.5.1"
   },
   "peerDependenciesMeta": {
-    "@deijose/nix-query": {
+    "@elurjs/query": {
       "optional": true
     }
   },
   "devDependencies": {
-    "@deijose/nix-js": "3.5.0",
-    "@deijose/nix-query": "^1.5.1",
+    "@elurjs/core": "3.5.0",
     "happy-dom": "^20.8.3",
     "terser": "^5.46.0",
     "typescript": "~5.9.3",
     "vite": "^8.0.0",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "@elurjs/query": "*"
   }
 }

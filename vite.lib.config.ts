@@ -9,20 +9,20 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       entry: {
-        "nix-js-auth": resolve("src/index.ts"),
+        "elur-auth": resolve("src/index.ts"),
         "command": resolve("src/command.ts"),
       },
-      name: "NixJsAuth",
+      name: "ElurJsAuth",
       formats: ["es", "cjs"],
       fileName: (format, entryName) =>
         `${entryName}.${format === "cjs" ? "cjs" : "js"}`,
     },
     rollupOptions: {
-      external: ["@deijose/nix-js", "@deijose/nix-query"],
+      external: ["@elurjs/core", "@elurjs/query"],
       output: {
         preserveModules: false,
         globals: {
-          "@deijose/nix-js": "NixJs",
+          "@elurjs/core": "ElurJs",
         },
       },
     },
