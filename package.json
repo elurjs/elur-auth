@@ -1,6 +1,6 @@
 {
   "name": "@elurjs/auth",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Authentication and authorization library for Elur — drivers, policies, and router guards built on signals.",
   "license": "MIT",
   "author": "Deiver Vasquez",
@@ -23,6 +23,11 @@
       "import": "./dist/lib/command.js",
       "require": "./dist/lib/command.cjs",
       "types": "./dist/lib/command.d.ts"
+    },
+    "./devtools": {
+      "import": "./dist/lib/devtools.js",
+      "require": "./dist/lib/devtools.cjs",
+      "types": "./dist/lib/devtools.d.ts"
     }
   },
   "keywords": [

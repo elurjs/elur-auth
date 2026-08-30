@@ -11,6 +11,7 @@ export default defineConfig({
       entry: {
         "elur-auth": resolve("src/index.ts"),
         "command": resolve("src/command.ts"),
+        "devtools": resolve("src/devtools.ts"),
       },
       name: "ElurJsAuth",
       formats: ["es", "cjs"],

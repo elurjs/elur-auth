@@ -10,7 +10,8 @@
   },
   "include": [
     "src/index.ts",
-    "src/command.ts"
+    "src/command.ts",
+    "src/devtools.ts"
   ],
   "exclude": [
     "src/__tests__"

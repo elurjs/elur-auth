@@ -53,6 +53,32 @@ function isAuthError(error: unknown): boolean {
   return status === 401 || status === 403;
 }
 
+/**
+ * @internal — Global registry of live auth instances for devtools.
+ * Shared via `Symbol.for` so it survives module duplication in bundles.
+ */
+const _instancesKey = Symbol.for("@elurjs/auth/instances");
+
+function _getInstanceRegistry(): Set<AuthInstance<unknown, unknown, unknown>> {
+  const g = globalThis as Record<PropertyKey, unknown>;
+  let set = g[_instancesKey] as Set<AuthInstance<unknown, unknown, unknown>> | undefined;
+  if (!set) {
+    set = new Set();
+    g[_instancesKey] = set;
+  }
+  return set;
+}
+
+function _registerAuthInstance(instance: AuthInstance<unknown, unknown, unknown>): void {
+  _getInstanceRegistry().add(instance);
+}
+
+function _unregisterAuthInstance(instance: AuthInstance<unknown, unknown, unknown>): void {
+  _getInstanceRegistry().delete(instance);
+}
+
+type AnyAuthInstance = AuthInstance<unknown, unknown, unknown>;
+
 export function createAuth<
   Session = unknown,
   User = unknown,
@@ -520,9 +546,10 @@ export function createAuth<
       _broadcastChannel.close();
       _broadcastChannel = null;
     }
+    _unregisterAuthInstance(instance as unknown as AnyAuthInstance);
   }
 
-  return {
+  const instance: AuthInstance<Session, User, Credentials> = {
     name,
     session,
     user,
@@ -557,4 +584,7 @@ export function createAuth<
     checkAllPermissions,
     dispose,
   };
+
+  _registerAuthInstance(instance as unknown as AnyAuthInstance);
+  return instance;
 }
