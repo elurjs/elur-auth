@@ -1,5 +1,5 @@
-export type UserLike = Record<string, unknown> | null;
-export type ContextLike = Record<string, unknown> | undefined;
+type UserLike = Record<string, unknown> | null;
+type ContextLike = Record<string, unknown> | undefined;
 export type PolicyCheck = (user: UserLike, context: ContextLike, session: unknown) => boolean;
 
 function resolveArray(user: UserLike, key: string): string[] {
