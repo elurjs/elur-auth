@@ -5,8 +5,8 @@
     "": {
       "name": "@elurjs/auth",
       "devDependencies": {
-        "@elurjs/core": "^4.0.0",
-        "@elurjs/query": "^1.6.0",
+        "@elurjs/core": "^4.0.1",
+        "@elurjs/query": "^1.6.1",
         "happy-dom": "^20.8.3",
         "terser": "^5.46.0",
         "typescript": "~7.0.2",
@@ -23,9 +23,9 @@
     },
   },
   "packages": {
-    "@elurjs/core": ["@elurjs/core@4.0.0", "", {}, "sha512-ma6Jkod2DruzjFt5E2ZGknk4ELLQC1L3WfbnJ3pSUS7/9mlF3LFr8l6aEBy20v69qU5XyeuFAedPx/wBCjMK+A=="],
+    "@elurjs/core": ["@elurjs/core@4.0.1", "", {}, "sha512-YHDNFnfKebAIs9DnrsNkv0ttvkLcLS8OD98uK4Yxt1T/EyKdgUaq72EXVva1jskDZzFnCP65nx7D6W6DiegZsA=="],
 
-    "@elurjs/query": ["@elurjs/query@1.6.0", "", { "peerDependencies": { "@elurjs/core": "^2.5.3 || ^3.0.0" } }, "sha512-GkFHbxFC5TuRI4i3QG7qy/DRiO7Gy/6JTgxZunLGEajn+pCJRwTkWvAF50kHjo2HHh1ZzHmtIl4DwsvZ86epFw=="],
+    "@elurjs/query": ["@elurjs/query@1.6.1", "", { "peerDependencies": { "@elurjs/core": "^3.0.0 || ^3.7.0-beta.0 || ^4.0.0" } }, "sha512-Lt5SWmi5piDZ3BLjGKbNf/YA5eIdk3FZKNWYsiQ7fSR970jId5aWa5JZQDspHS7404XvVm9H1zkVazsbpSJz5Q=="],
 
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 
