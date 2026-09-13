@@ -1,6 +1,6 @@
 {
   "name": "@elurjs/auth",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Authentication and authorization library for Elur — drivers, policies, and router guards built on signals.",
   "license": "MIT",
   "author": "Deiver Vasquez",
@@ -62,7 +62,7 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "@elurjs/core": "^3.0.0",
+    "@elurjs/core": "^3.0.0 || ^3.7.0-beta.0 || ^4.0.0",
     "@elurjs/query": "^1.5.1"
   },
   "peerDependenciesMeta": {
@@ -71,7 +71,7 @@
     }
   },
   "devDependencies": {
-    "@elurjs/core": "^3.6.2",
+    "@elurjs/core": "^4.0.0",
     "happy-dom": "^20.8.3",
     "terser": "^5.46.0",
     "typescript": "~7.0.2",
